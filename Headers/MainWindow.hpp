@@ -7,7 +7,6 @@
 
 #include <QKeyEvent>
 #include <QCloseEvent>
-#include <QFocusEvent>
 
 #include "Dialogs/QuitDialog.hpp"
 
@@ -30,7 +29,7 @@ private:
 protected:
     void keyPressEvent(QKeyEvent* e);
     void closeEvent(QCloseEvent* e);
-    void focusInEvent(QFocusEvent* e);
+
 
 public:
     explicit MainWindow(QWidget* parent = nullptr);
