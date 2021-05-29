@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QLabel>
 
+#include <QEvent>
 #include <QKeyEvent>
 #include <QCloseEvent>
 
@@ -35,9 +36,13 @@ private:
     void posLenForPath(QLabel* path, const QString& new_path);
     void clearLayout();
 
+    void cd(QPushButton* button);
+
 protected:
     void keyPressEvent(QKeyEvent* e);
     void closeEvent(QCloseEvent* e);
+
+    bool eventFilter(QObject* obj, QEvent* event) override;
 
 
 public:

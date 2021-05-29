@@ -50,6 +50,8 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
         button->setFlat(true);
         button->setStyleSheet(m_btnStyle);
 
+        button->installEventFilter(this);
+
         connect(button, &QPushButton::clicked, this, &MainWindow::changeDir);
 
         m_flist.append(button);
@@ -66,11 +68,8 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 MainWindow::~MainWindow()
 { 
-    delete ui;
-    ui = nullptr;
-
     delete quitDg;
-    quitDg = nullptr;
+    delete ui;
 }
 
 void MainWindow::posLenForPath(QLabel* path, const QString& new_path)
@@ -147,7 +146,33 @@ void MainWindow::keyPressEvent(QKeyEvent* e)
 void MainWindow::closeEvent(QCloseEvent* e) 
 {
     Q_UNUSED(e);
-    QCoreApplication::exit(0); 
+    QCoreApplication::exit(0);
+}
+
+bool MainWindow::eventFilter(QObject* obj, QEvent* event)
+{
+	int index;
+
+	if((index = m_flist.indexOf((QPushButton*)obj)) != -1)
+	{
+		if(event->type() == QEvent::KeyPress)
+		{
+			QKeyEvent* keyEvent = (QKeyEvent*) event;
+
+			if(keyEvent->key() == Qt::Key_Return)
+			{
+				cd(m_flist[index]);
+				return true;
+			}
+			else
+				return false;
+
+		}
+		else
+			return false;
+	}
+	else
+		return QMainWindow::eventFilter(obj, event);
 }
 
 void MainWindow::setDirContent(const QString& cdpath)
@@ -174,6 +199,8 @@ void MainWindow::setDirContent(const QString& cdpath)
         button->setFlat(true);
         button->setStyleSheet(m_btnStyle);
 
+        button->installEventFilter(this);
+
         connect(button, &QPushButton::clicked, this, &MainWindow::changeDir);
 
         m_flist.append(button);
@@ -188,25 +215,38 @@ void MainWindow::changeDir()
 {
     QPushButton* snd = (QPushButton*) QObject::sender();
 
-    QString cd = snd->text();
-    cd.remove(0, 1);
+    // //It is necessary to remove the first
+    // //character, since it is a space
+    // QString cd = snd->text();
+    // cd.remove(0, 1);
 
-    setDirContent(cd);
+    // setDirContent(cd);
+
+    cd(snd);
 
 }
 
 void MainWindow::clearLayout()
 {
-	QLayout* layout = ui->scrollAreaWidgetContents->layout();
+    QLayout* layout = ui->scrollAreaWidgetContents->layout();
 
-	if(layout)
-	{
-		QLayoutItem* item;
-		while((item = layout->takeAt(0)))
-		{
-			delete item->widget();
-			delete item;
-		}
-	}
+    if(layout)
+    {
+        QLayoutItem* item;
+        while((item = layout->takeAt(0)))
+        {
+            delete item->widget();
+            delete item;
+        }
+    }
 }
 
+void MainWindow::cd(QPushButton* button)
+{
+	//It is necessary to remove the first
+    //character, since it is a space
+	QString cd = button->text();
+	cd.remove(0, 1);
+
+	setDirContent(cd);
+}
