@@ -16,6 +16,10 @@ private slots:
 	void quitDialog();
 	void closeAppAfterClickYes();
 	void closeDialogAfterClickNo();
+
+	/*Pressing 'Home' and 'End'*/
+	void pressHomeAndEnd();
+
 };
 
 #endif //__TEST_MAIN_WINDOW_HPP__

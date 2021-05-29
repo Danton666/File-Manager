@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QFileInfo>
 #include <QPushButton>
+#include <QLabel>
 
 #include <QKeyEvent>
 #include <QCloseEvent>
@@ -21,10 +22,18 @@ class MainWindow : public QMainWindow
 private:
     Ui::MainWindow *ui;
     QuitDialog* quitDg;
+
+    QString m_btnStyle;
     
     QVector<QPushButton*> m_flist;
 
     QFileInfoList* m_list;
+
+    QString m_abs_path;
+
+private:
+    void posLenForPath(QLabel* path, const QString& new_path);
+    void clearLayout();
 
 protected:
     void keyPressEvent(QKeyEvent* e);
@@ -36,12 +45,16 @@ public:
     ~MainWindow();
 
     Ui::MainWindow* getUi();
+    QuitDialog* getQuitDialog();
+    QFileInfoList* getListOfDir();
+    QVector<QPushButton*> getButtonList();
 
     QFileInfoList* DirContent(const QString& path);
-    QFileInfoList* getListOfDir();
+    void setDirContent(const QString& cd);
 
-    QuitDialog* getQuitDialog();
-    QVector<QPushButton*> getButtonList();
+
+public slots:
+    void changeDir();
 
 };
 
