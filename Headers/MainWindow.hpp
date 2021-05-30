@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QFileInfo>
 #include <QPushButton>
+#include <QVBoxLayout>
 #include <QLabel>
 
 #include <QEvent>
@@ -80,7 +81,7 @@ public:
     QVector<QPushButton*> getButtonList();
 
     QFileInfoList* DirContent(const QString& path);
-    void setDirContent(const QString& cd);
+    void setDirContent(const QString& cd = ".", QVBoxLayout* vbox = nullptr);
 
 
 public slots:

@@ -28,7 +28,6 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
                                 "{"
                                     "text-align:left;"
                                     "font-size:25px;"
-                                    "color:white;"
                                 "}"
                                 "QPushButton::focus"
                                 "{"
@@ -40,45 +39,18 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     m_abs_path = QDir::homePath();
 
     ui->setupUi(this);
-    posLenForPath(ui->path, m_abs_path);;
-
-    QFileInfoList* list = DirContent(QString(QDir::homePath()));
+    posLenForPath(ui->path, m_abs_path);
 
     QVBoxLayout* vbox = new QVBoxLayout;
     vbox->setContentsMargins(0, 0, 0, 0);
     vbox->setSpacing(0);
 
-    //So that there are no spaces
-    //between the buttons if there are less that 17
-    // of them (there is a '.' button int he list, which 
-    //refers to the current dir, so the size of the list
-    //must be at least 18)
-    if(list->size() < 18)
-        ui->scrollArea->setGeometry(QRect(33, 64, 307, (list->size() - 1) * 41));
-    else
-        ui->scrollArea->setGeometry(QRect(33, 64, 307, 691));
-
-    for(int i = 1; i < list->size(); ++i)
-    {
-        QPushButton* button = new QPushButton(' ' + (list->at(i)).fileName(), ui->scrollAreaWidgetContents);
-        button->setFixedSize(305, 40);
-        button->setFlat(true);
-        button->setStyleSheet(m_btnStyle);
-
-        button->installEventFilter(this);
-
-        connect(button, &QPushButton::clicked, this, &MainWindow::changeDir);
-
-        m_flist.append(button);
-
-        vbox->addWidget(button);
-    }
-
-    current_btn = m_flist.first();
-
     ui->scrollAreaWidgetContents->setLayout(vbox);
 
+    setDirContent(".", vbox);
     setAutoFillBackground(true);
+
+    current_btn = m_flist.first();
 
     quitDg = new QuitDialog(this);
 }
@@ -144,7 +116,7 @@ void MainWindow::keyPressEvent(QKeyEvent* e)
 {
     //If the Q key is pressed, a window appears to
     //quit the application
-    if(e->key() == Qt::Key_Q)
+    if(e->modifiers() == Qt::ControlModifier && e->key() == Qt::Key_Q)
         quitDg->show();
     //'End' key sets the focus on the last button
     else if(e->key() == Qt::Key_End)
@@ -218,7 +190,7 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event)
         return QMainWindow::eventFilter(obj, event);
 }
 
-void MainWindow::setDirContent(const QString& cdpath)
+void MainWindow::setDirContent(const QString& cdpath, QVBoxLayout* vbox)
 {
     QDir* dir = new QDir(m_abs_path);
 
@@ -233,7 +205,7 @@ void MainWindow::setDirContent(const QString& cdpath)
     m_flist.clear();
     clearLayout();
 
-    QVBoxLayout* vbox = (QVBoxLayout*) ui->scrollAreaWidgetContents->layout();
+    // QVBoxLayout* vbox = (QVBoxLayout*) ui->scrollAreaWidgetContents->layout();
 
     //So that there are no spaces
     //between the buttons if there are less that 17
@@ -251,6 +223,13 @@ void MainWindow::setDirContent(const QString& cdpath)
         button->setFixedSize(305, 40);
         button->setFlat(true);
         button->setStyleSheet(m_btnStyle);
+
+        if(list->at(i).isDir())
+            button->setStyleSheet(m_btnStyle + " QPushButton{color:white;}");
+        else if(list->at(i).isHidden())
+            button->setStyleSheet(m_btnStyle + " QPushButton{color:grey;}");
+        else
+            button->setStyleSheet(m_btnStyle + " QPushButton{color:rgb(135, 99, 99);}");
 
         button->installEventFilter(this);
 
@@ -296,7 +275,7 @@ void MainWindow::cd(const QPushButton* button)
     QString cd = button->text();
     cd.remove(0, 1);
 
-    setDirContent(cd);
+    setDirContent(cd, (QVBoxLayout*) ui->scrollAreaWidgetContents->layout());
 }
 
 void MainWindow::setInfo(const QPushButton* button)

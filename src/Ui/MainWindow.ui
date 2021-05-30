@@ -14,8 +14,9 @@
    <string>Manager</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">
-background-color: rgb(127, 16, 16);</string>
+   <string notr="true">background-color: rgb(51, 0, 67);
+
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="Line" name="Hline_1">
