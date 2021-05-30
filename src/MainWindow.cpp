@@ -1,6 +1,8 @@
 #include <QtDebug>
 
 #include <QDir>
+#include <QRect>
+#include <QDateTime>
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QScrollArea>
@@ -42,6 +44,16 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     QVBoxLayout* vbox = new QVBoxLayout;
     vbox->setContentsMargins(0, 0, 0, 0);
     vbox->setSpacing(0);
+
+    //So that there are no spaces
+    //between the buttons if there are less that 17
+    // of them (there is a '.' button int he list, which 
+    //refers to the current dir, so the size of the list
+    //must be at least 18)
+    if(list->size() < 18)
+	    ui->scrollArea->setGeometry(QRect(33, 64, 307, (list->size() - 1) * 41));
+	else
+		ui->scrollArea->setGeometry(QRect(33, 64, 307, 691));
 
     for(int i = 1; i < list->size(); ++i)
     {
@@ -164,6 +176,25 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event)
 				cd(m_flist[index]);
 				return true;
 			}
+			else if(keyEvent->key() == Qt::Key_I)
+			{
+				setInfo((QPushButton*)obj);
+				qDebug() << m_type;
+				qDebug() << m_size;
+				qDebug() << m_birth_time;
+				qDebug() << m_symbol_link;
+				qDebug() << m_last_modified;
+				qDebug() << m_last_read << '\n';
+				qDebug() << m_owner;
+				qDebug() << m_group;
+				qDebug() << m_owner_id;
+				qDebug() << m_group_id << '\n';
+				qDebug() << m_writable;
+				qDebug() << m_readable;
+				qDebug() << m_executable;
+				qDebug() << "------------------------------------------------------------------";
+				return true;
+			}
 			else
 				return false;
 
@@ -192,6 +223,16 @@ void MainWindow::setDirContent(const QString& cdpath)
 
     QVBoxLayout* vbox = (QVBoxLayout*) ui->scrollAreaWidgetContents->layout();
 
+    //So that there are no spaces
+    //between the buttons if there are less that 17
+    // of them (there is a '.' button int he list, which 
+    //refers to the current dir, so the size of the list
+    //must be at least 18)
+    if(list->size() < 18)
+	    ui->scrollArea->setGeometry(QRect(33, 64, 307, (list->size() - 1) * 41));
+	else
+		ui->scrollArea->setGeometry(QRect(33, 64, 307, 691));
+
     for(int i = 1; i < list->size(); ++i)
     {
         QPushButton* button = new QPushButton(' ' + (list->at(i)).fileName(), ui->scrollAreaWidgetContents);
@@ -214,14 +255,6 @@ void MainWindow::setDirContent(const QString& cdpath)
 void MainWindow::changeDir()
 {
     QPushButton* snd = (QPushButton*) QObject::sender();
-
-    // //It is necessary to remove the first
-    // //character, since it is a space
-    // QString cd = snd->text();
-    // cd.remove(0, 1);
-
-    // setDirContent(cd);
-
     cd(snd);
 
 }
@@ -241,7 +274,7 @@ void MainWindow::clearLayout()
     }
 }
 
-void MainWindow::cd(QPushButton* button)
+void MainWindow::cd(const QPushButton* button)
 {
 	//It is necessary to remove the first
     //character, since it is a space
@@ -249,4 +282,76 @@ void MainWindow::cd(QPushButton* button)
 	cd.remove(0, 1);
 
 	setDirContent(cd);
+}
+
+void MainWindow::setInfo(const QPushButton* button)
+{
+	QFileInfo* info = new QFileInfo(m_abs_path + '/' + button->text().remove(0, 1));
+
+	qDebug() << info->absoluteFilePath();
+
+	if(info)
+	{
+		//File type
+		if(info->isDir())
+			m_type = "directory";
+		else if(info->isHidden())
+			m_type = "hidden";
+		else if(info->isFile())
+			m_type = "file";
+		else
+			m_type = "unknown";
+
+		//Size
+		m_size = info->size();
+
+		//Birth time
+		m_birth_time = info->birthTime().toString();
+
+		//is it a symbol link
+		if(info->isSymLink())
+			m_symbol_link = "Yes";
+		else
+			m_symbol_link = "No";
+
+		//Last modified
+		m_last_modified = info->lastModified().toString();
+
+		//Last read
+		m_last_read = info->lastRead().toString();
+
+		//Owner
+		m_owner = info->owner();
+
+		//Group
+		m_group = info->group();
+
+		//Owner ID
+		m_owner_id = info->ownerId();
+
+		//Group ID
+		m_group_id = info->groupId();
+
+		//Is it writable
+		if(info->isWritable())
+			m_writable = "Yes";
+		else
+			m_writable = "No";
+
+		//Is it readable
+		if(info->isReadable())
+			m_readable = "Yes";
+		else
+			m_readable = "No";
+
+		//Is it executable
+		if(info->isExecutable())
+			m_executable = "Yes";
+		else
+			m_executable = "No";
+
+	}
+
+	delete info;
+
 }

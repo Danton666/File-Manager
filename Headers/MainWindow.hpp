@@ -32,11 +32,29 @@ private:
 
     QString m_abs_path;
 
+    //Info
+    QString m_type;
+    qint64 m_size;
+    QString m_birth_time;
+    QString m_symbol_link;
+    QString m_last_modified;
+    QString m_last_read;
+
+    QString m_owner;
+    QString m_group;
+    uint m_owner_id;
+    uint m_group_id;
+
+    QString m_writable;
+    QString m_readable;
+    QString m_executable; 
+
 private:
     void posLenForPath(QLabel* path, const QString& new_path);
     void clearLayout();
+    void cd(const QPushButton* button);
 
-    void cd(QPushButton* button);
+    void setInfo(const QPushButton* button);
 
 protected:
     void keyPressEvent(QKeyEvent* e);
