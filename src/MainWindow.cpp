@@ -17,6 +17,9 @@
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
 
+    //Hot keys
+    ctrl_i = false;
+
     m_btnStyle = QString(" QPushButton::flat"
                                 "{"
                                     "border:none;"
@@ -51,9 +54,9 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     //refers to the current dir, so the size of the list
     //must be at least 18)
     if(list->size() < 18)
-	    ui->scrollArea->setGeometry(QRect(33, 64, 307, (list->size() - 1) * 41));
-	else
-		ui->scrollArea->setGeometry(QRect(33, 64, 307, 691));
+        ui->scrollArea->setGeometry(QRect(33, 64, 307, (list->size() - 1) * 41));
+    else
+        ui->scrollArea->setGeometry(QRect(33, 64, 307, 691));
 
     for(int i = 1; i < list->size(); ++i)
     {
@@ -70,6 +73,8 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 
         vbox->addWidget(button);
     }
+
+    current_btn = m_flist.first();
 
     ui->scrollAreaWidgetContents->setLayout(vbox);
 
@@ -163,47 +168,54 @@ void MainWindow::closeEvent(QCloseEvent* e)
 
 bool MainWindow::eventFilter(QObject* obj, QEvent* event)
 {
-	int index;
+    int index;
 
-	if((index = m_flist.indexOf((QPushButton*)obj)) != -1)
-	{
-		if(event->type() == QEvent::KeyPress)
-		{
-			QKeyEvent* keyEvent = (QKeyEvent*) event;
+    if((index = m_flist.indexOf((QPushButton*)obj)) != -1)
+    {
+        if(current_btn != (QPushButton*)obj)
+        {
+            current_btn = (QPushButton*)obj;
 
-			if(keyEvent->key() == Qt::Key_Return)
-			{
-				cd(m_flist[index]);
-				return true;
-			}
-			else if(keyEvent->key() == Qt::Key_I)
-			{
-				setInfo((QPushButton*)obj);
-				qDebug() << m_type;
-				qDebug() << m_size;
-				qDebug() << m_birth_time;
-				qDebug() << m_symbol_link;
-				qDebug() << m_last_modified;
-				qDebug() << m_last_read << '\n';
-				qDebug() << m_owner;
-				qDebug() << m_group;
-				qDebug() << m_owner_id;
-				qDebug() << m_group_id << '\n';
-				qDebug() << m_writable;
-				qDebug() << m_readable;
-				qDebug() << m_executable;
-				qDebug() << "------------------------------------------------------------------";
-				return true;
-			}
-			else
-				return false;
+            if(ctrl_i)
+                setInfo((QPushButton*)obj);
+        }
 
-		}
-		else
-			return false;
-	}
-	else
-		return QMainWindow::eventFilter(obj, event);
+        if(event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent* keyEvent = (QKeyEvent*) event;
+
+            if(keyEvent->key() == Qt::Key_Return)
+            {
+                cd(m_flist[index]);
+                return true;
+            }
+            else if(keyEvent->modifiers() == Qt::ControlModifier && keyEvent->key() == Qt::Key_I)
+            {
+                if(!ctrl_i)
+                {
+                    setInfo((QPushButton*)obj);
+                    ctrl_i = true;
+
+                    return true;
+                }
+                else
+                {
+                    clearInfo();
+                    ctrl_i = false;
+
+                    return true;
+                }
+
+            }
+            else
+                return false;
+
+        }
+        else
+            return false;
+    }
+    else
+        return QMainWindow::eventFilter(obj, event);
 }
 
 void MainWindow::setDirContent(const QString& cdpath)
@@ -229,9 +241,9 @@ void MainWindow::setDirContent(const QString& cdpath)
     //refers to the current dir, so the size of the list
     //must be at least 18)
     if(list->size() < 18)
-	    ui->scrollArea->setGeometry(QRect(33, 64, 307, (list->size() - 1) * 41));
-	else
-		ui->scrollArea->setGeometry(QRect(33, 64, 307, 691));
+        ui->scrollArea->setGeometry(QRect(33, 64, 307, (list->size() - 1) * 41));
+    else
+        ui->scrollArea->setGeometry(QRect(33, 64, 307, 691));
 
     for(int i = 1; i < list->size(); ++i)
     {
@@ -252,13 +264,15 @@ void MainWindow::setDirContent(const QString& cdpath)
     m_flist.first()->setFocus();
 }
 
+//It can be used only as a slot
+//it uses QObject::sender
 void MainWindow::changeDir()
 {
     QPushButton* snd = (QPushButton*) QObject::sender();
     cd(snd);
-
 }
 
+//Removes all widgets of the scrollAreaWidgetContents' layout
 void MainWindow::clearLayout()
 {
     QLayout* layout = ui->scrollAreaWidgetContents->layout();
@@ -274,84 +288,126 @@ void MainWindow::clearLayout()
     }
 }
 
+//Change directory
 void MainWindow::cd(const QPushButton* button)
 {
-	//It is necessary to remove the first
+    //It is necessary to remove the first
     //character, since it is a space
-	QString cd = button->text();
-	cd.remove(0, 1);
+    QString cd = button->text();
+    cd.remove(0, 1);
 
-	setDirContent(cd);
+    setDirContent(cd);
 }
 
 void MainWindow::setInfo(const QPushButton* button)
 {
-	QFileInfo* info = new QFileInfo(m_abs_path + '/' + button->text().remove(0, 1));
+    QFileInfo* info = new QFileInfo(m_abs_path + '/' + button->text().remove(0, 1));
 
-	qDebug() << info->absoluteFilePath();
+    if(info)
+    {
+        //File type
+        if(info->isDir())
+            m_type = "directory";
+        else if(info->isHidden())
+            m_type = "hidden";
+        else if(info->isFile())
+            m_type = "file";
+        else
+            m_type = "unknown";
 
-	if(info)
-	{
-		//File type
-		if(info->isDir())
-			m_type = "directory";
-		else if(info->isHidden())
-			m_type = "hidden";
-		else if(info->isFile())
-			m_type = "file";
-		else
-			m_type = "unknown";
+        //Size
+        m_size = info->size();
 
-		//Size
-		m_size = info->size();
+        //Birth time
+        m_birth_time = info->birthTime().toString();
 
-		//Birth time
-		m_birth_time = info->birthTime().toString();
+        //is it a symbol link
+        if(info->isSymLink())
+            m_symbol_link = "Yes";
+        else
+            m_symbol_link = "No";
 
-		//is it a symbol link
-		if(info->isSymLink())
-			m_symbol_link = "Yes";
-		else
-			m_symbol_link = "No";
+        //Last modified
+        m_last_modified = info->lastModified().toString();
 
-		//Last modified
-		m_last_modified = info->lastModified().toString();
+        //Last read
+        m_last_read = info->lastRead().toString();
 
-		//Last read
-		m_last_read = info->lastRead().toString();
+        //Owner
+        m_owner = info->owner();
 
-		//Owner
-		m_owner = info->owner();
+        //Group
+        m_group = info->group();
 
-		//Group
-		m_group = info->group();
+        //Owner ID
+        m_owner_id = info->ownerId();
 
-		//Owner ID
-		m_owner_id = info->ownerId();
+        //Group ID
+        m_group_id = info->groupId();
 
-		//Group ID
-		m_group_id = info->groupId();
+        //Is it writable
+        if(info->isWritable())
+            m_writable = "Yes";
+        else
+            m_writable = "No";
 
-		//Is it writable
-		if(info->isWritable())
-			m_writable = "Yes";
-		else
-			m_writable = "No";
+        //Is it readable
+        if(info->isReadable())
+            m_readable = "Yes";
+        else
+            m_readable = "No";
 
-		//Is it readable
-		if(info->isReadable())
-			m_readable = "Yes";
-		else
-			m_readable = "No";
+        //Is it executable
+        if(info->isExecutable())
+            m_executable = "Yes";
+        else
+            m_executable = "No";
 
-		//Is it executable
-		if(info->isExecutable())
-			m_executable = "Yes";
-		else
-			m_executable = "No";
+        infToWindow();
+    }
 
-	}
+    delete info;
 
-	delete info;
+}
 
+//Sets all values on the main window
+void MainWindow::infToWindow()
+{
+    ui->type->setText("Type: " + m_type);
+    ui->size->setText("Size: " + QString::number(m_size) + " Bytes");
+    ui->birth_time->setText("Birth time: " + m_birth_time);
+    ui->sym_link->setText("Symbol link: " + m_symbol_link);
+    ui->last_modif->setText("Last modified: " + m_last_modified);
+    ui->last_read->setText("Last read: " + m_last_read);
+
+    ui->owner->setText("Owner: " + m_owner);
+    ui->group->setText("Group: " + m_group);
+
+    ui->owner_id->setText("Owner ID: " + QString::number(m_owner_id));
+    ui->group_id->setText("Group ID: " + QString::number(m_group_id));
+
+    ui->writable->setText("Writable: " + m_writable);
+    ui->readable->setText("Readable: " + m_readable);
+    ui->executable->setText("Executable: " + m_executable);
+}
+
+//Sets all values to default
+void MainWindow::clearInfo()
+{
+    ui->type->setText("Type: ");
+    ui->size->setText("Size: ");
+    ui->birth_time->setText("Birth time: ");
+    ui->sym_link->setText("Symbol link: ");
+    ui->last_modif->setText("Last modified: ");
+    ui->last_read->setText("Last read: ");
+
+    ui->owner->setText("Owner: ");
+    ui->group->setText("Group: ");
+
+    ui->owner_id->setText("Owner ID: ");
+    ui->group_id->setText("Group ID: ");
+
+    ui->writable->setText("Writable: ");
+    ui->readable->setText("Readable: ");
+    ui->executable->setText("Executable: ");
 }

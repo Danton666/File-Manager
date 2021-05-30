@@ -32,6 +32,8 @@ private:
 
     QString m_abs_path;
 
+    QPushButton* current_btn;
+
     //Info
     QString m_type;
     qint64 m_size;
@@ -49,12 +51,17 @@ private:
     QString m_readable;
     QString m_executable; 
 
+    //hot keys
+    bool ctrl_i;
+
 private:
     void posLenForPath(QLabel* path, const QString& new_path);
     void clearLayout();
     void cd(const QPushButton* button);
 
     void setInfo(const QPushButton* button);
+    void clearInfo();
+    void infToWindow();
 
 protected:
     void keyPressEvent(QKeyEvent* e);

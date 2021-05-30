@@ -275,13 +275,13 @@ font: 30px &quot;Ubuntu Condensed&quot;;</string>
      <rect>
       <x>820</x>
       <y>110</y>
-      <width>311</width>
+      <width>331</width>
       <height>81</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
+    <layout class="QVBoxLayout" name="who_own">
      <item>
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="owner">
        <property name="styleSheet">
         <string notr="true">
 QLabel{
@@ -296,7 +296,7 @@ QLabel{
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_10">
+      <widget class="QLabel" name="group">
        <property name="styleSheet">
         <string notr="true">
 QLabel{
@@ -321,9 +321,9 @@ QLabel{
       <height>81</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout_4">
+    <layout class="QVBoxLayout" name="ID">
      <item>
-      <widget class="QLabel" name="label_12">
+      <widget class="QLabel" name="owner_id">
        <property name="styleSheet">
         <string notr="true">
 QLabel{
@@ -338,7 +338,7 @@ QLabel{
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_13">
+      <widget class="QLabel" name="group_id">
        <property name="styleSheet">
         <string notr="true">
 QLabel{
@@ -359,11 +359,11 @@ QLabel{
      <rect>
       <x>820</x>
       <y>390</y>
-      <width>321</width>
+      <width>331</width>
       <height>338</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout_3">
+    <layout class="QVBoxLayout" name="rights">
      <property name="spacing">
       <number>0</number>
      </property>
@@ -374,7 +374,7 @@ QLabel{
       <number>100</number>
      </property>
      <item>
-      <widget class="QLabel" name="label_6">
+      <widget class="QLabel" name="writable">
        <property name="styleSheet">
         <string notr="true">
 QLabel{
@@ -389,7 +389,7 @@ QLabel{
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_7">
+      <widget class="QLabel" name="readable">
        <property name="styleSheet">
         <string notr="true">
 QLabel{
@@ -404,7 +404,7 @@ QLabel{
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_11">
+      <widget class="QLabel" name="executable">
        <property name="styleSheet">
         <string notr="true">
 QLabel{
@@ -425,11 +425,11 @@ QLabel{
      <rect>
       <x>380</x>
       <y>80</y>
-      <width>369</width>
+      <width>391</width>
       <height>649</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="basic_inf">
      <property name="spacing">
       <number>0</number>
      </property>
@@ -440,7 +440,7 @@ QLabel{
       <number>200</number>
      </property>
      <item>
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="type">
        <property name="styleSheet">
         <string notr="true">
 QLabel{
@@ -455,7 +455,7 @@ QLabel{
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="size">
        <property name="styleSheet">
         <string notr="true">
 QLabel{
@@ -470,7 +470,7 @@ QLabel{
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_14">
+      <widget class="QLabel" name="birth_time">
        <property name="styleSheet">
         <string notr="true">
 QLabel{
@@ -482,10 +482,13 @@ QLabel{
        <property name="text">
         <string>Birth time:</string>
        </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_4">
+      <widget class="QLabel" name="sym_link">
        <property name="styleSheet">
         <string notr="true">
 QLabel{
@@ -500,7 +503,7 @@ QLabel{
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_8">
+      <widget class="QLabel" name="last_modif">
        <property name="styleSheet">
         <string notr="true">
 QLabel{
@@ -512,10 +515,13 @@ QLabel{
        <property name="text">
         <string>Last modified:</string>
        </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_9">
+      <widget class="QLabel" name="last_read">
        <property name="styleSheet">
         <string notr="true">
 QLabel{
@@ -526,6 +532,9 @@ QLabel{
        </property>
        <property name="text">
         <string>Last read:</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
