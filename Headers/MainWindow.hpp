@@ -13,6 +13,7 @@
 
 #include "Dialogs/QuitDialog.hpp"
 #include "Dialogs/MkdirDialog.hpp"
+#include "Dialogs/RmdirDialog.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,6 +25,7 @@ class MainWindow : public QMainWindow
 
 public:
     QString m_abs_path;
+    QPushButton* current_btn;
 
 private:
     Ui::MainWindow *ui;
@@ -31,6 +33,7 @@ private:
     //Dialogs
     QuitDialog* quitDg;
     MkdirDialog* mkdirDg;
+    RmdirDialog* rmdirDg;
 
     QString m_btnStyle;
     
@@ -39,7 +42,6 @@ private:
     QFileInfoList* m_list;
 
 
-    QPushButton* current_btn;
 
     //Info
     QString m_type;

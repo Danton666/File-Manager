@@ -14,6 +14,8 @@ class MkdirDialog : public QDialog
 private:
 	Ui::MkdirDialog* ui;
 
+	bool check_dir;
+
 private:
 	void makeDir(const QString& path);
 
@@ -26,6 +28,7 @@ public:
 
 public slots:
 	void mkdir();
+	void chkdir();
 };
 
 #endif //__MKDIR_DIALOG_HPP__

@@ -23,6 +23,7 @@ set(HEADERS
 
 			Headers/Dialogs/QuitDialog.hpp
 			Headers/Dialogs/MkdirDialog.hpp
+			Headers/Dialogs/RmdirDialog.hpp
 			)
 
 set(SOURCE
@@ -31,6 +32,7 @@ set(SOURCE
 
 			src/Dialogs/QuitDialog.cpp
 			src/Dialogs/MkdirDialog.cpp
+			src/Dialogs/RmdirDialog.cpp
 			)
 
 add_executable(Manager ${SOURCE} ${HEADERS})

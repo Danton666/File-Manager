@@ -25,8 +25,20 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="cursor">
+    <cursorShape>IBeamCursor</cursorShape>
+   </property>
    <property name="styleSheet">
-    <string notr="true">font: 25px &quot;Ubuntu&quot;;</string>
+    <string notr="true">QLineEdit{font: 25px &quot;Ubuntu&quot;;}</string>
+   </property>
+   <property name="frame">
+    <bool>true</bool>
+   </property>
+   <property name="echoMode">
+    <enum>QLineEdit::Normal</enum>
+   </property>
+   <property name="clearButtonEnabled">
+    <bool>false</bool>
    </property>
   </widget>
   <widget class="QLabel" name="label">

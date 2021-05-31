@@ -55,6 +55,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     quitDg = new QuitDialog(this);
     mkdirDg = new MkdirDialog(this);
+    rmdirDg = new RmdirDialog(this);
 }
 
 MainWindow::~MainWindow()
@@ -137,6 +138,11 @@ void MainWindow::keyPressEvent(QKeyEvent* e)
     else if(e->key() == Qt::Key_F1)
     {
         mkdirDg->exec();
+        setDirContent(".", (QVBoxLayout*) ui->scrollAreaWidgetContents->layout());
+    }
+    else if(e->key() == Qt::Key_F2)
+    {
+        rmdirDg->exec();
         setDirContent(".", (QVBoxLayout*) ui->scrollAreaWidgetContents->layout());
     }
 }
