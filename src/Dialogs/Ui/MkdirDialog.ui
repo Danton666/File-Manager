@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QuitDialog</class>
- <widget class="QDialog" name="QuitDialog">
+ <class>MkdirDialog</class>
+ <widget class="QDialog" name="MkdirDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>368</width>
-    <height>166</height>
+    <width>428</width>
+    <height>214</height>
    </rect>
-  </property>
-  <property name="contextMenuPolicy">
-   <enum>Qt::DefaultContextMenu</enum>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
@@ -19,24 +16,98 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(186, 189, 182);</string>
   </property>
-  <property name="sizeGripEnabled">
-   <bool>false</bool>
-  </property>
-  <property name="modal">
-   <bool>false</bool>
-  </property>
-  <widget class="QWidget" name="horizontalLayoutWidget">
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>70</y>
+     <width>361</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 25px &quot;Ubuntu&quot;;</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>56</x>
+     <y>20</y>
+     <width>301</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 25px &quot;Ubuntu&quot;;</string>
+   </property>
+   <property name="text">
+    <string>***Create directory***</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="Line" name="line_10">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>30</y>
+     <width>3</width>
+     <height>170</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(0, 0, 0);</string>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_11">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>200</y>
+     <width>400</width>
+     <height>3</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(0, 0, 0);</string>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_12">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>30</y>
+     <width>3</width>
+     <height>173</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(0, 0, 0);</string>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_2">
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>30</y>
-     <width>261</width>
-     <height>111</height>
+     <y>120</y>
+     <width>321</width>
+     <height>61</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="hbox">
     <item>
-     <widget class="QPushButton" name="Yes">
+     <widget class="QPushButton" name="Confirm">
       <property name="minimumSize">
        <size>
         <width>0</width>
@@ -51,7 +122,7 @@ font: 16pt &quot;Ubuntu&quot;;
 }</string>
       </property>
       <property name="text">
-       <string>Yes</string>
+       <string>Confirm</string>
       </property>
       <property name="flat">
        <bool>true</bool>
@@ -59,7 +130,7 @@ font: 16pt &quot;Ubuntu&quot;;
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="No">
+     <widget class="QPushButton" name="Cancel">
       <property name="minimumSize">
        <size>
         <width>84</width>
@@ -74,7 +145,7 @@ font: 16pt &quot;Ubuntu&quot;;
 }</string>
       </property>
       <property name="text">
-       <string>No</string>
+       <string>Cancel</string>
       </property>
       <property name="flat">
        <bool>true</bool>
@@ -83,44 +154,12 @@ font: 16pt &quot;Ubuntu&quot;;
     </item>
    </layout>
   </widget>
-  <widget class="Line" name="line">
+  <widget class="Line" name="line_13">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>140</y>
-     <width>302</width>
-     <height>3</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(0, 0, 0);</string>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="Line" name="line_2">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
+     <x>10</x>
      <y>30</y>
-     <width>3</width>
-     <height>112</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(0, 0, 0);</string>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Vertical</enum>
-   </property>
-  </widget>
-  <widget class="Line" name="line_3">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>130</y>
-     <width>282</width>
+     <width>65</width>
      <height>3</height>
     </rect>
    </property>
@@ -131,13 +170,29 @@ font: 16pt &quot;Ubuntu&quot;;
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <widget class="Line" name="line_4">
+  <widget class="Line" name="line_14">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>340</x>
+     <y>30</y>
+     <width>70</width>
+     <height>3</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(0, 0, 0);</string>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_15">
+   <property name="geometry">
+    <rect>
+     <x>402</x>
      <y>40</y>
-     <width>3</width>
-     <height>92</height>
+     <width>2</width>
+     <height>153</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -147,42 +202,29 @@ font: 16pt &quot;Ubuntu&quot;;
     <enum>Qt::Vertical</enum>
    </property>
   </widget>
-  <widget class="Line" name="line_5">
+  <widget class="Line" name="line_16">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>30</y>
-     <width>302</width>
-     <height>3</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="Line" name="line_6">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>30</y>
-     <width>302</width>
-     <height>3</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(0, 0, 0);</string>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="Line" name="line_7">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
+     <x>18</x>
      <y>40</y>
-     <width>283</width>
-     <height>3</height>
+     <width>2</width>
+     <height>153</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(0, 0, 0);</string>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_17">
+   <property name="geometry">
+    <rect>
+     <x>18</x>
+     <y>192</y>
+     <width>386</width>
+     <height>2</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -192,58 +234,36 @@ font: 16pt &quot;Ubuntu&quot;;
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <widget class="Line" name="line_8">
+  <widget class="Line" name="line_18">
    <property name="geometry">
     <rect>
-     <x>330</x>
-     <y>30</y>
-     <width>3</width>
-     <height>112</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(0, 0, 0);</string>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Vertical</enum>
-   </property>
-  </widget>
-  <widget class="Line" name="line_9">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
+     <x>18</x>
      <y>40</y>
-     <width>3</width>
-     <height>92</height>
+     <width>90</width>
+     <height>2</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(0, 0, 0);</string>
    </property>
    <property name="orientation">
-    <enum>Qt::Vertical</enum>
+    <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="Line" name="line_19">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>20</y>
-     <width>151</width>
-     <height>31</height>
+     <x>305</x>
+     <y>40</y>
+     <width>99</width>
+     <height>2</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 25px &quot;Ubuntu&quot;;</string>
+    <string notr="true">background-color: rgb(0, 0, 0);</string>
    </property>
-   <property name="frameShape">
-    <enum>QFrame::NoFrame</enum>
-   </property>
-   <property name="text">
-    <string>*** Quit? ***</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
    </property>
   </widget>
  </widget>

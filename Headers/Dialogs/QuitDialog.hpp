@@ -19,9 +19,6 @@ public:
     explicit QuitDialog(QWidget* parent = nullptr);
     ~QuitDialog();
 
-public slots:
-	void closeApp();
-
 public:
     Ui::QuitDialog* getUi();
 

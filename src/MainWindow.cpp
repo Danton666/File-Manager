@@ -42,6 +42,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     posLenForPath(ui->path, m_abs_path);
 
     QVBoxLayout* vbox = new QVBoxLayout;
+    // vbox->setObjectName("vbox");
     vbox->setContentsMargins(0, 0, 0, 0);
     vbox->setSpacing(0);
 
@@ -53,11 +54,14 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     current_btn = m_flist.first();
 
     quitDg = new QuitDialog(this);
+    mkdirDg = new MkdirDialog(this);
 }
 
 MainWindow::~MainWindow()
 { 
     delete quitDg;
+    delete mkdirDg;
+
     delete ui;
 }
 
@@ -117,7 +121,7 @@ void MainWindow::keyPressEvent(QKeyEvent* e)
     //If the Q key is pressed, a window appears to
     //quit the application
     if(e->modifiers() == Qt::ControlModifier && e->key() == Qt::Key_Q)
-        quitDg->show();
+        quitDg->exec();
     //'End' key sets the focus on the last button
     else if(e->key() == Qt::Key_End)
     {
@@ -130,12 +134,11 @@ void MainWindow::keyPressEvent(QKeyEvent* e)
         m_flist.first()->setFocus();
         ui->scrollArea->verticalScrollBar()->setValue(ui->scrollArea->verticalScrollBar()->minimum());
     }
-}
-
-void MainWindow::closeEvent(QCloseEvent* e) 
-{
-    Q_UNUSED(e);
-    QCoreApplication::exit(0);
+    else if(e->key() == Qt::Key_F1)
+    {
+        mkdirDg->exec();
+        setDirContent(".", (QVBoxLayout*) ui->scrollAreaWidgetContents->layout());
+    }
 }
 
 bool MainWindow::eventFilter(QObject* obj, QEvent* event)

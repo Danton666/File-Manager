@@ -10,18 +10,11 @@ QuitDialog::QuitDialog(QWidget* parent) : QDialog(parent, Qt::FramelessWindowHin
 
     setWindowModality(Qt::WindowModality::WindowModal);
 
-    connect((ui->Yes), &QPushButton::clicked, this, &QuitDialog::closeApp);
+    connect((ui->Yes), &QPushButton::clicked, qApp, &QApplication::quit);
     connect((ui->No), &QPushButton::clicked, this, &QWidget::close);
 }
 
 QuitDialog::~QuitDialog() { delete ui; }
-
-void QuitDialog::closeApp()
-{
-	this->close();
-	parentWidget()->close();
-	qApp->quit();
-}
 
 Ui::QuitDialog* QuitDialog::getUi() { return ui; }
 

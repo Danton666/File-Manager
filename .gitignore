@@ -1,3 +1,4 @@
 build/
 Tests/
+Headers/tests/
 *.stash

@@ -12,6 +12,7 @@
 #include <QCloseEvent>
 
 #include "Dialogs/QuitDialog.hpp"
+#include "Dialogs/MkdirDialog.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,9 +22,15 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+public:
+    QString m_abs_path;
+
 private:
     Ui::MainWindow *ui;
+
+    //Dialogs
     QuitDialog* quitDg;
+    MkdirDialog* mkdirDg;
 
     QString m_btnStyle;
     
@@ -31,7 +38,6 @@ private:
 
     QFileInfoList* m_list;
 
-    QString m_abs_path;
 
     QPushButton* current_btn;
 
@@ -66,7 +72,6 @@ private:
 
 protected:
     void keyPressEvent(QKeyEvent* e);
-    void closeEvent(QCloseEvent* e);
 
     bool eventFilter(QObject* obj, QEvent* event) override;
 

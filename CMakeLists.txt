@@ -7,7 +7,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+set(CMAKE_CXX_FLAGS "-Wall -O2")
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
@@ -20,16 +20,18 @@ find_package(Qt5 	COMPONENTS
 
 set(HEADERS 
 			Headers/MainWindow.hpp
+
 			Headers/Dialogs/QuitDialog.hpp
+			Headers/Dialogs/MkdirDialog.hpp
 			)
 
 set(SOURCE
 			src/main.cpp
 			src/MainWindow.cpp
-			src/Dialogs/QuitDialog.cpp
-			)
 
-add_definitions(-Wall -O2)
+			src/Dialogs/QuitDialog.cpp
+			src/Dialogs/MkdirDialog.cpp
+			)
 
 add_executable(Manager ${SOURCE} ${HEADERS})
 
