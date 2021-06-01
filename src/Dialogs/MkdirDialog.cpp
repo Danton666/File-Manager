@@ -6,13 +6,11 @@
 #include "Ui/ui_MkdirDialog.h"
 
 
-MkdirDialog::MkdirDialog(QWidget* parent) : QDialog(parent, Qt::FramelessWindowHint), ui(new Ui::MkdirDialog)
+MkdirDialog::MkdirDialog(QWidget* parent) : AbstractDialog(parent), ui(new Ui::MkdirDialog)
 {
 	check_dir = false;
 
 	ui->setupUi(this);
-
-	setWindowModality(Qt::WindowModality::WindowModal);
 
 	connect((ui->lineEdit), &QLineEdit::textEdited, this, &MkdirDialog::chkdir);
 

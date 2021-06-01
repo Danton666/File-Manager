@@ -588,7 +588,7 @@ QLabel{
 </string>
        </property>
        <property name="text">
-        <string>Mkdir</string>
+        <string/>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -643,7 +643,7 @@ QLabel{
 </string>
        </property>
        <property name="text">
-        <string>Rmdir</string>
+        <string/>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -688,11 +688,17 @@ QLabel{
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true">QLabel{color:black; font:25px &quot;Ubuntu&quot;; border:none; background-color:rgb(0, 255, 214);}
+        <string notr="true">QLabel{
+	color:black;
+ 	font:25px &quot;Ubuntu&quot;; 
+	font:bold;
+	border:none; 
+	background-color:rgb(0, 255, 214);
+}
 </string>
        </property>
        <property name="text">
-        <string/>
+        <string>CrFile</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -737,11 +743,17 @@ QLabel{
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true">QLabel{color:black; font:25px &quot;Ubuntu&quot;; border:none; background-color:rgb(0, 255, 214);}
+        <string notr="true">QLabel{
+	color:black;
+ 	font:25px &quot;Ubuntu&quot;; 
+	font:bold;
+	border:none; 
+	background-color:rgb(0, 255, 214);
+}
 </string>
        </property>
        <property name="text">
-        <string/>
+        <string>Copy</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -835,11 +847,17 @@ QLabel{
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true">QLabel{color:black; font:25px &quot;Ubuntu&quot;; border:none; background-color:rgb(0, 255, 214);}
+        <string notr="true">QLabel{
+	color:black;
+ 	font:25px &quot;Ubuntu&quot;; 
+	font:bold;
+	border:none; 
+	background-color:rgb(0, 255, 214);
+}
 </string>
        </property>
        <property name="text">
-        <string/>
+        <string>Del</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -884,11 +902,17 @@ QLabel{
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true">QLabel{color:black; font:25px &quot;Ubuntu&quot;; border:none; background-color:rgb(0, 255, 214);}
+        <string notr="true">QLabel{
+	color:black;
+ 	font:25px &quot;Ubuntu&quot;; 
+	font:bold;
+	border:none; 
+	background-color:rgb(0, 255, 214);
+}
 </string>
        </property>
        <property name="text">
-        <string/>
+        <string>MkDir</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>

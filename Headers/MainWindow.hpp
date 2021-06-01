@@ -13,8 +13,9 @@
 
 #include "Dialogs/QuitDialog.hpp"
 #include "Dialogs/MkdirDialog.hpp"
-#include "Dialogs/RmdirDialog.hpp"
+#include "Dialogs/DeleteDialog.hpp"
 #include "Dialogs/CrtFileDialog.hpp"
+#include "Dialogs/CopyDialog.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -34,8 +35,9 @@ private:
     //Dialogs
     QuitDialog* quitDg;
     MkdirDialog* mkdirDg;
-    RmdirDialog* rmdirDg;
+    DeleteDialog* delDg;
     CrtFileDialog* crtfDg;
+    CopyDialog* cpDg;
 
     QString m_btnStyle;
     

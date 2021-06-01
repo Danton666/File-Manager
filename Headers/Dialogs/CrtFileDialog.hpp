@@ -1,13 +1,14 @@
 #ifndef __CRT_FILE_DIALOG_HPP__
 #define __CRT_FILE_DIALOG_HPP__
 
-#include <QDialog>
+// #include <QDialog>
+#include "Dialogs/AbstractDialog.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class CrtFileDialog; }
 QT_END_NAMESPACE
 
-class CrtFileDialog : public QDialog
+class CrtFileDialog : public AbstractDialog
 {
 	Q_OBJECT
 

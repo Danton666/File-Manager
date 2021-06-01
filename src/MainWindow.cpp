@@ -55,15 +55,16 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     quitDg = new QuitDialog(this);
     mkdirDg = new MkdirDialog(this);
-    rmdirDg = new RmdirDialog(this);
+    delDg = new DeleteDialog(this);
     crtfDg = new CrtFileDialog(this);
+    cpDg = new CopyDialog(this);
 }
 
 MainWindow::~MainWindow()
 { 
     delete quitDg;
     delete mkdirDg;
-    delete rmdirDg;
+    delete delDg;
     delete crtfDg;
 
     delete ui;
@@ -114,7 +115,7 @@ QFileInfoList* MainWindow::DirContent(const QString& path)
 {
     QDir* dir = new QDir(path);
 
-    dir->setFilter(QDir::Files | QDir::AllDirs | QDir::Hidden);
+    dir->setFilter(QDir::Files | QDir::AllDirs | QDir::Hidden | QDir::NoDot);
     dir->setSorting(QDir::Name);
 
     return new QFileInfoList(dir->entryInfoList());
@@ -138,20 +139,25 @@ void MainWindow::keyPressEvent(QKeyEvent* e)
         m_flist.first()->setFocus();
         ui->scrollArea->verticalScrollBar()->setValue(ui->scrollArea->verticalScrollBar()->minimum());
     }
-    else if(e->key() == Qt::Key_F1)
+    else if(e->key() == Qt::Key_F7)
     {
         mkdirDg->exec();
         setDirContent(".", (QVBoxLayout*) ui->scrollAreaWidgetContents->layout());
     }
-    else if(e->key() == Qt::Key_F2)
+    else if(e->key() == Qt::Key_F6)
     {
-        rmdirDg->exec();
+        delDg->exec();
         setDirContent(".", (QVBoxLayout*) ui->scrollAreaWidgetContents->layout());
     }
     else if(e->key() == Qt::Key_F3)
     {
         crtfDg->exec();
         setDirContent(".", (QVBoxLayout*) ui->scrollAreaWidgetContents->layout());
+    }
+    else if(e->key() == Qt::Key_F4)
+    {
+        cpDg->exec();
+        setDirContent(".", (QVBoxLayout*) ui->scrollAreaWidgetContents->layout());   
     }
 }
 
@@ -226,15 +232,13 @@ void MainWindow::setDirContent(const QString& cdpath, QVBoxLayout* vbox)
 
     //So that there are no spaces
     //between the buttons if there are less that 17
-    // of them (there is a '.' button int he list, which 
-    //refers to the current dir, so the size of the list
-    //must be at least 18)
-    if(list->size() < 18)
-        ui->scrollArea->setGeometry(QRect(33, 64, 307, (list->size() - 1) * 41));
+    // of them
+    if(list->size() < 17)
+        ui->scrollArea->setGeometry(QRect(33, 64, 307, list->size() * 42));
     else
         ui->scrollArea->setGeometry(QRect(33, 64, 307, 691));
 
-    for(int i = 1; i < list->size(); ++i)
+    for(int i = 0; i < list->size(); ++i)
     {
         QPushButton* button = new QPushButton(' ' + (list->at(i)).fileName(), ui->scrollAreaWidgetContents);
         button->setFixedSize(305, 40);
@@ -260,6 +264,8 @@ void MainWindow::setDirContent(const QString& cdpath, QVBoxLayout* vbox)
     }
 
     m_flist.first()->setFocus();
+
+    delete dir;
 }
 
 //It can be used only as a slot

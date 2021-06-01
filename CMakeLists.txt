@@ -21,20 +21,26 @@ find_package(Qt5 	COMPONENTS
 set(HEADERS 
 			Headers/MainWindow.hpp
 
+			Headers/Dialogs/AbstractDialog.hpp
+
 			Headers/Dialogs/QuitDialog.hpp
 			Headers/Dialogs/MkdirDialog.hpp
-			Headers/Dialogs/RmdirDialog.hpp
+			Headers/Dialogs/DeleteDialog.hpp
 			Headers/Dialogs/CrtFileDialog.hpp
+			Headers/Dialogs/CopyDialog.hpp
 			)
 
 set(SOURCE
 			src/main.cpp
 			src/MainWindow.cpp
 
+			src/Dialogs/AbstractDialog.cpp
+
 			src/Dialogs/QuitDialog.cpp
 			src/Dialogs/MkdirDialog.cpp
-			src/Dialogs/RmdirDialog.cpp
+			src/Dialogs/DeleteDialog.cpp
 			src/Dialogs/CrtFileDialog.cpp
+			src/Dialogs/CopyDialog.cpp
 			)
 
 add_executable(Manager ${SOURCE} ${HEADERS})

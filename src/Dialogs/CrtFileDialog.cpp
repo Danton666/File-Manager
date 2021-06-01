@@ -5,13 +5,11 @@
 #include "Dialogs/CrtFileDialog.hpp"
 #include "Ui/ui_CrtFileDialog.h"
 
-CrtFileDialog::CrtFileDialog(QWidget* parent) : QDialog(parent, Qt::FramelessWindowHint), ui(new Ui::CrtFileDialog)
+CrtFileDialog::CrtFileDialog(QWidget* parent) : AbstractDialog(parent), ui(new Ui::CrtFileDialog)
 {
 	check_file = false;
 
 	ui->setupUi(this);
-
-	setWindowModality(Qt::WindowModality::WindowModal);
 
 	connect((ui->lineEdit), &QLineEdit::textEdited, this, &CrtFileDialog::chkfile);
 

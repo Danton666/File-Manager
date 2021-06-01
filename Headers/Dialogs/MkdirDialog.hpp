@@ -1,13 +1,14 @@
 #ifndef __MKDIR_DIALOG_HPP__
 #define __MKDIR_DIALOG_HPP__
 
-#include <QDialog>
+// #include <QDialog>
+#include "Dialogs/AbstractDialog.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MkdirDialog; }
 QT_END_NAMESPACE
 
-class MkdirDialog : public QDialog
+class MkdirDialog : public AbstractDialog
 {
 	Q_OBJECT
 
