@@ -14,6 +14,7 @@
 #include "Dialogs/QuitDialog.hpp"
 #include "Dialogs/MkdirDialog.hpp"
 #include "Dialogs/RmdirDialog.hpp"
+#include "Dialogs/CrtFileDialog.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -34,14 +35,13 @@ private:
     QuitDialog* quitDg;
     MkdirDialog* mkdirDg;
     RmdirDialog* rmdirDg;
+    CrtFileDialog* crtfDg;
 
     QString m_btnStyle;
     
     QVector<QPushButton*> m_flist;
 
     QFileInfoList* m_list;
-
-
 
     //Info
     QString m_type;

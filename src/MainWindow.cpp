@@ -56,12 +56,15 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     quitDg = new QuitDialog(this);
     mkdirDg = new MkdirDialog(this);
     rmdirDg = new RmdirDialog(this);
+    crtfDg = new CrtFileDialog(this);
 }
 
 MainWindow::~MainWindow()
 { 
     delete quitDg;
     delete mkdirDg;
+    delete rmdirDg;
+    delete crtfDg;
 
     delete ui;
 }
@@ -121,7 +124,7 @@ void MainWindow::keyPressEvent(QKeyEvent* e)
 {
     //If the Q key is pressed, a window appears to
     //quit the application
-    if(e->modifiers() == Qt::ControlModifier && e->key() == Qt::Key_Q)
+    if(e->key() == Qt::Key_F10)
         quitDg->exec();
     //'End' key sets the focus on the last button
     else if(e->key() == Qt::Key_End)
@@ -143,6 +146,11 @@ void MainWindow::keyPressEvent(QKeyEvent* e)
     else if(e->key() == Qt::Key_F2)
     {
         rmdirDg->exec();
+        setDirContent(".", (QVBoxLayout*) ui->scrollAreaWidgetContents->layout());
+    }
+    else if(e->key() == Qt::Key_F3)
+    {
+        crtfDg->exec();
         setDirContent(".", (QVBoxLayout*) ui->scrollAreaWidgetContents->layout());
     }
 }
@@ -237,6 +245,8 @@ void MainWindow::setDirContent(const QString& cdpath, QVBoxLayout* vbox)
             button->setStyleSheet(m_btnStyle + " QPushButton{color:white;}");
         else if(list->at(i).isHidden())
             button->setStyleSheet(m_btnStyle + " QPushButton{color:grey;}");
+        else if(list->at(i).isExecutable())
+            button->setStyleSheet(m_btnStyle + " QPushButton{color:green;}");
         else
             button->setStyleSheet(m_btnStyle + " QPushButton{color:rgb(135, 99, 99);}");
 

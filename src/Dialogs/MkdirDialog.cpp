@@ -27,19 +27,17 @@ MkdirDialog::~MkdirDialog()
 
 const Ui::MkdirDialog* MkdirDialog::getUi() const { return ui; }
 
-void MkdirDialog::makeDir(const QString& path)
-{
-	QDir* dir = new QDir(path);
-
-	dir->mkdir(ui->lineEdit->text());
-}
-
 //Slots
 void MkdirDialog::mkdir()
 {
 	if(check_dir)
 	{
-		makeDir(((MainWindow*)parent())->m_abs_path);
+		// makeDir(((MainWindow*)parent())->m_abs_path);
+		QDir* dir = new QDir(((MainWindow*)parent())->m_abs_path);
+
+		dir->mkdir(ui->lineEdit->text());
+
+		delete dir;
 		close();
 	}
 }

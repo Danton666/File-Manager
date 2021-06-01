@@ -16,9 +16,6 @@ private:
 
 	bool check_dir;
 
-private:
-	void makeDir(const QString& path);
-
 public:
 	MkdirDialog(QWidget* parent = nullptr);
 	~MkdirDialog();
