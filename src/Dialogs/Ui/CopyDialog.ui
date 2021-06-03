@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>428</width>
-    <height>214</height>
+    <height>384</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -74,7 +74,7 @@ background-color:none;</string>
      <x>8</x>
      <y>30</y>
      <width>3</width>
-     <height>170</height>
+     <height>290</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -84,11 +84,11 @@ background-color:none;</string>
     <enum>Qt::Vertical</enum>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="new_path">
    <property name="geometry">
     <rect>
      <x>28</x>
-     <y>70</y>
+     <y>180</y>
      <width>361</width>
      <height>41</height>
     </rect>
@@ -115,7 +115,7 @@ background-color:none;</string>
    <property name="geometry">
     <rect>
      <x>8</x>
-     <y>200</y>
+     <y>318</y>
      <width>400</width>
      <height>3</height>
     </rect>
@@ -131,7 +131,7 @@ background-color:none;</string>
    <property name="geometry">
     <rect>
      <x>48</x>
-     <y>120</y>
+     <y>238</y>
      <width>321</width>
      <height>61</height>
     </rect>
@@ -207,7 +207,7 @@ font: 16pt &quot;Ubuntu&quot;;
      <x>16</x>
      <y>40</y>
      <width>2</width>
-     <height>153</height>
+     <height>271</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -221,7 +221,7 @@ font: 16pt &quot;Ubuntu&quot;;
    <property name="geometry">
     <rect>
      <x>16</x>
-     <y>192</y>
+     <y>310</y>
      <width>386</width>
      <height>2</height>
     </rect>
@@ -255,7 +255,7 @@ font: 16pt &quot;Ubuntu&quot;;
      <x>408</x>
      <y>30</y>
      <width>3</width>
-     <height>173</height>
+     <height>291</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -271,7 +271,7 @@ font: 16pt &quot;Ubuntu&quot;;
      <x>400</x>
      <y>40</y>
      <width>2</width>
-     <height>153</height>
+     <height>271</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -279,6 +279,57 @@ font: 16pt &quot;Ubuntu&quot;;
    </property>
    <property name="orientation">
     <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>50</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:none;
+font: 15pt &quot;Ubuntu&quot;;</string>
+   </property>
+   <property name="text">
+    <string>Old path:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>140</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:none;
+font: 15pt &quot;Ubuntu&quot;;</string>
+   </property>
+   <property name="text">
+    <string>New path:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="old_path">
+   <property name="geometry">
+    <rect>
+     <x>28</x>
+     <y>90</y>
+     <width>361</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:none;
+font: 25px &quot;Ubuntu&quot;;</string>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

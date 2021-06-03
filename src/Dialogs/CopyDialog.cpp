@@ -11,7 +11,7 @@ CopyDialog::CopyDialog(QWidget* parent) : AbstractDialog(parent), ui(new Ui::Cop
 {
 	ui->setupUi(this);
 
-	connect((ui->lineEdit), &QLineEdit::textEdited, this, &CopyDialog::chkdir);
+	connect((ui->new_path), &QLineEdit::textEdited, this, &CopyDialog::chkdir);
 
 	connect((ui->Confirm), &QPushButton::clicked, this, &CopyDialog::cp);
 	connect((ui->Cancel), &QPushButton::clicked, this, &QWidget::close);
@@ -24,7 +24,7 @@ void CopyDialog::cp()
 {
 	QString name(((MainWindow*)parent())->current_btn->text().remove(0, 1));
 	QString path(((MainWindow*)parent())->m_abs_path + '/' + name);
-	QString dest(ui->lineEdit->text());
+	QString dest(ui->new_path->text());
 
 	QFileInfo* entry = new QFileInfo(path);
 
@@ -59,16 +59,16 @@ void CopyDialog::cp()
 
 void CopyDialog::chkdir()
 {
-	QString dirName = ui->lineEdit->text();
+	QString dirName = ui->new_path->text();
 
 	if(!QDir(dirName).exists())
 	{
 		check_dest = false;
-		ui->lineEdit->setStyleSheet("QLineEdit{font:25px'Ubuntu';} QLineEdit{color:red;}");
+		ui->new_path->setStyleSheet("QLineEdit{font:25px'Ubuntu';} QLineEdit{color:red;}");
 	}
 	else
 	{
 		check_dest = true;
-		ui->lineEdit->setStyleSheet("QLineEdit{font:25px'Ubuntu';} QLineEdit{color:green;}");
+		ui->new_path->setStyleSheet("QLineEdit{font:25px'Ubuntu';} QLineEdit{color:green;}");
 	}
 }

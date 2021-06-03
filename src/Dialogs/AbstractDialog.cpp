@@ -5,3 +5,5 @@ AbstractDialog::AbstractDialog(QWidget* parent) : QDialog(parent, Qt::FramelessW
 	setWindowModality(Qt::WindowModality::WindowModal);
 }
 AbstractDialog::~AbstractDialog() {}
+
+void AbstractDialog::showEvent(QShowEvent* event) { QDialog::showEvent(event); }
