@@ -9,7 +9,7 @@ This application has written with Qt, OOP and has built up with CMake.
   <li><code>$ cmake --build ./build</code></li>
 </ol>
 <br>
-Executable file will be File-Manager/build/Manager <br>
+Executable file will be <code>File-Manager/build/Manager</code> <br>
 Besides that, you have to install:
 <ol>
   <li>Qt Framework</li>
